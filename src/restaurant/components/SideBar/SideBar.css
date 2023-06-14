@@ -1,0 +1,16 @@
+.ListItemButton {
+  height: '20%';
+  display: 'flex'; 
+  justify-content: 'center';
+}
+
+.logout-icon {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+.logout-icon:hover {
+  color: red; /* Cambia 'blue' al color deseado para el hover */
+  cursor: pointer;
+  transition: all 1s;
+
+}
