@@ -1,0 +1,10 @@
+.foodBorderEnd {
+  padding-right: 1rem;
+  border-right: 1px solid rgba(56, 56, 56, 0.2);
+}
+
+.foodImgResponsive {
+  min-height: 156px;
+  max-height: 156px;
+  object-fit: cover;
+}

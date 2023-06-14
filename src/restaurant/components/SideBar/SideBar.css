@@ -14,3 +14,7 @@
   transition: all 1s;
 
 }
+.sidebar-container {
+  height: 100vh; /* Establece la altura del sidebar al 100% del viewport */
+  display: flex; /* Asegura que el contenedor del sidebar se comporte como un flexbox */
+}

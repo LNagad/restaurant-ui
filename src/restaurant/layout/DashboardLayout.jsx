@@ -1,10 +1,15 @@
-import { Box, Toolbar } from '@mui/material';
+import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import { NavBar, SideBar } from '../components';
 
-const drawerWidth = 140;
+let drawerWidth = 140;
 
-export const DashboardLayout = ({ children }) => {
+export const DashboardLayout = ({ children, title }) => {
 
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+  if (isMobile) drawerWidth -= 80;
+  
   return (
     <Box
       sx={{
@@ -18,11 +23,13 @@ export const DashboardLayout = ({ children }) => {
       */}
 
       <SideBar drawerWidth={ drawerWidth } />
-      <NavBar drawerWidth={ drawerWidth }/>
+      <NavBar drawerWidth={ drawerWidth } title={ title } />
+
       <Box
         component={'main'}
-        sx={{ flexGrow: 1, padding: 3 }}
+        sx={{ flexGrow: 1, padding: 3, ml: `${isMobile ? 75 : drawerWidth}px` }}
       >
+        <Toolbar />
         <Toolbar />
 
         { children }

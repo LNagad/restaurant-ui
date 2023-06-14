@@ -12,6 +12,9 @@ export const blackTheme = createTheme({
     listItems: {
       main: '#C0C0C0'
     },
+    reviewStar: {
+      main: '#fcc203'
+    },
     error: {
       main: red.A400
     }
