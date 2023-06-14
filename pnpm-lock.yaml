@@ -29,6 +29,9 @@ dependencies:
   animate.css:
     specifier: ^4.1.1
     version: 4.1.1
+  material-react-table:
+    specifier: ^1.12.1
+    version: 1.12.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/icons-material@5.11.16)(@mui/material@5.13.5)(react-dom@18.2.0)(react@18.2.0)
   prop-types:
     specifier: ^15.8.1
     version: 15.8.1
@@ -864,6 +867,43 @@ packages:
       '@swc/core-win32-x64-msvc': 1.3.63
     dev: true
 
+  /@tanstack/match-sorter-utils@8.8.4:
+    resolution: {integrity: sha512-rKH8LjZiszWEvmi01NR72QWZ8m4xmXre0OOwlRGnjU01Eqz/QnN+cqpty2PJ0efHblq09+KilvyR7lsbzmXVEw==}
+    engines: {node: '>=12'}
+    dependencies:
+      remove-accents: 0.4.2
+    dev: false
+
+  /@tanstack/react-table@8.9.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Irvw4wqVF9hhuYzmNrlae4IKdlmgSyoRWnApSLebvYzqHoi5tEsYzBj6YPd0hX78aB/L+4w/jgK2eBQVpGfThQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.9.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@tanstack/react-virtual@3.0.0-beta.54(react@18.2.0):
+    resolution: {integrity: sha512-D1mDMf4UPbrtHRZZriCly5bXTBMhylslm4dhcHqTtDJ6brQcgGmk8YD9JdWBGWfGSWPKoh2x1H3e7eh+hgPXtQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.0.0-beta.54
+      react: 18.2.0
+    dev: false
+
+  /@tanstack/table-core@8.9.2:
+    resolution: {integrity: sha512-ajc0OF+karBAdaSz7OK09rCoAHB1XI1+wEhu+tDNMPc+XcO+dTlXXN/Vc0a8vym4kElvEjXEDd9c8Zfgt4bekA==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /@tanstack/virtual-core@3.0.0-beta.54:
+    resolution: {integrity: sha512-jtkwqdP2rY2iCCDVAFuaNBH3fiEi29aTn2RhtIoky8DTTiCdc48plpHHreLwmv1PICJ4AJUUESaq3xa8fZH8+g==}
+    dev: false
+
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
@@ -1601,6 +1641,11 @@ packages:
     dependencies:
       function-bind: 1.1.1
 
+  /highlight-words@1.2.2:
+    resolution: {integrity: sha512-Mf4xfPXYm8Ay1wTibCrHpNWeR2nUMynMVFkXCi4mbl+TEgmNOe+I4hV7W3OCZcSvzGL6kupaqpfHOemliMTGxQ==}
+    engines: {node: '>= 16', npm: '>= 8'}
+    dev: false
+
   /hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
@@ -1901,6 +1946,29 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /material-react-table@1.12.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/icons-material@5.11.16)(@mui/material@5.13.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-sGEYts4Zj3eiFHe4rQ48VxQCaJgoNZCsk/A8mJ1hsApya8NlWQercnnXoLzVec4sUP6MwWaonEWBiOssLHdfMA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@emotion/react': '>=11'
+      '@emotion/styled': '>=11'
+      '@mui/icons-material': '>=5'
+      '@mui/material': '>=5'
+      react: '>=17.0'
+      react-dom: '>=17.0'
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.0.37)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@18.0.37)(react@18.2.0)
+      '@mui/icons-material': 5.11.16(@mui/material@5.13.5)(@types/react@18.0.37)(react@18.2.0)
+      '@mui/material': 5.13.5(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.0.37)(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/match-sorter-utils': 8.8.4
+      '@tanstack/react-table': 8.9.2(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-virtual': 3.0.0-beta.54(react@18.2.0)
+      highlight-words: 1.2.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -2209,6 +2277,10 @@ packages:
       define-properties: 1.2.0
       functions-have-names: 1.2.3
     dev: true
+
+  /remove-accents@0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
 
   /reselect@4.1.8:
     resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}

@@ -27,9 +27,9 @@ export const DashboardLayout = ({ children, title }) => {
 
       <Box
         component={'main'}
-        sx={{ flexGrow: 1, padding: 3, ml: `${isMobile ? 75 : drawerWidth}px` }}
+        marginLeft={{ sm: '100px', lg: `${drawerWidth}px`}}
+        sx={{ flexGrow: 1, padding: 3 }}
       >
-        <Toolbar />
         <Toolbar />
 
         { children }

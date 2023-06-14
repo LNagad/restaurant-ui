@@ -1,6 +1,7 @@
+import { Example } from '../components';
 
 export const Orders = () => {
   return (
-    <div>Orders</div>
+    <Example />
   );
 };

@@ -1,5 +1,7 @@
+import { Example } from '../components';
+
 export const Tables = () => {
   return (
-    <div>Tables</div>
+    <Example />
   );
 };

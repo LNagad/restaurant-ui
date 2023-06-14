@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Drawer, Grid, List, useMediaQuery } from '@mui/material';
 import { LogoutOutlined, HomeOutlined, LocalPizzaOutlined, TableBarOutlined, LunchDiningOutlined, BookOutlined } from '@mui/icons-material';
 
@@ -10,12 +10,20 @@ export const SideBar = ({ drawerWidth = 140 }) => {
   
   const dispatch = useDispatch();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const { activeView } = useSelector( state => state.restaurant );
   
   if (isMobile) drawerWidth -= 80;
 
   const onLogout = () => {
     dispatch( logout() );
   };
+
+  const sideBarItems = [
+    { item: <HomeOutlined color={activeView === 'DashBoard' ? 'white' : 'listItems'} />, viewName: 'DashBoard' },
+    { item: <LocalPizzaOutlined color={activeView === 'Food' ? 'white' : 'listItems'} />, viewName: 'Food' },
+    { item: <TableBarOutlined color={activeView === 'Tables' ? 'white' : 'listItems'} />, viewName: 'Tables' },
+    { item: <BookOutlined color={activeView === 'Orders' ? 'white' : 'listItems'} />, viewName: 'Orders' }
+  ];
 
   return (
     <Box component='nav' className='sidebar-container'>
@@ -42,10 +50,13 @@ export const SideBar = ({ drawerWidth = 140 }) => {
           >
             <SideBarListItem height='15%' item={<LunchDiningOutlined/>} viewName='DashBoard'/>
 
-            <SideBarListItem item={<HomeOutlined color='listItems' /> } viewName='DashBoard'/>
-            <SideBarListItem item={<LocalPizzaOutlined color='listItems'/>} viewName='Food'/>
-            <SideBarListItem item={<TableBarOutlined color='listItems' />} viewName='Tables'/>
-            <SideBarListItem item={<BookOutlined color='listItems' />} viewName='Orders'/>
+            {sideBarItems.map((sidebarItem, index) => (
+              <SideBarListItem
+                key={index}
+                item={sidebarItem.item}
+                viewName={sidebarItem.viewName}
+              />
+            ))}
 
             <Grid item alignItems={'end'}
               sx={{ height: '40%', display: 'flex', justifyContent: 'center'}}

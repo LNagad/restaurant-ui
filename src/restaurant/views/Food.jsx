@@ -5,12 +5,9 @@ import { FoodGridItem } from '../components';
 export const Food = () => {
   return (
     <Grid container
-      xs={12}
-      justifyContent={'space-evenly'}
     >
       <Grid item
         xs={12}
-        justifyContent={'space-evenly'}
         padding={4}
       >
         <Typography fontSize={25} fontWeight={500}>Find the best foods 😋</Typography>
@@ -18,7 +15,12 @@ export const Food = () => {
 
       {/* //TODO: CATEGORY CARROUSEL */ }
 
-      <Grid container justifyContent={'start'}>
+      <Grid 
+        container 
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+      >
         <FoodGridItem img='/public/assets/ella-olsson.jpg' />
         <FoodGridItem />
         <FoodGridItem />

@@ -1,0 +1,15 @@
+.centerDivCards{
+display: flex ;
+justify-content: center ;
+align-items: end ;
+height: 50%;
+}
+
+.centerDivCardSecondary{
+  display: flex ;
+  justify-content: start ;
+  align-items: center ;
+  flex-direction: column;
+  /* height: calc(255px - 50%) ; */
+  height: 50%;
+} 
