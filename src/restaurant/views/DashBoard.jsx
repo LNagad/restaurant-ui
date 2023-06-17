@@ -3,7 +3,7 @@ import { ReceiptLongOutlined } from '@mui/icons-material';
 import { RestaurantMenuOutlined } from '@mui/icons-material';
 import { FmdGoodOutlined } from '@mui/icons-material';
 import { FastfoodOutlined } from '@mui/icons-material';
-import { DashBoardBoxItem, DashBoardCharts } from '../components';
+import { DashBoardBoxItem, DashBoardCharts, DashBoardOrdersFeed } from '../components';
 
 import './DashBoard.css';
 import { LineChart } from '../components/Views/DashBoard/Charts/LineChart';
@@ -80,6 +80,7 @@ export const DashBoard = () => {
         </Grid>
 
         <DashBoardCharts/>
+        <DashBoardOrdersFeed />
       </Grid>
     </>
   );

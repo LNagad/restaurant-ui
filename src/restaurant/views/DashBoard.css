@@ -1,18 +1,21 @@
-.centerDivCards{
-display: flex ;
-justify-content: center ;
-align-items: end ;
-height: 50%;
+.centerDivCards {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  height: 50%;
 }
-
-.centerDivCardSecondary{
-  display: flex ;
-  justify-content: start ;
-  align-items: center ;
+.lineDivider {
+   width: 100%;
+   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.centerDivCardSecondary {
+  display: flex;
+  justify-content: start;
+  align-items: center;
   flex-direction: column;
   /* height: calc(255px - 50%) ; */
   height: 50%;
-} 
+}
 
 .boxShadow {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -20,4 +23,26 @@ height: 50%;
 
 .fontCharts {
   font-weight: 'bold' !important;
+}
+
+.feedImg {
+  width: 58px;
+  height: 58px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.orderFeedTime {
+  /* display={'flex'} 
+  alignItems={'center'}
+  justifyContent={'end'} */
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+}
+
+.orderFeedTitlesScreen {
+
 }
