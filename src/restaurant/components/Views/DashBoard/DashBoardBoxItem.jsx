@@ -9,7 +9,7 @@ export const DashBoardBoxItem = ({icon, iconStyles, title, number, bg }) => {
       height={{ xs: '255px'}}
       padding={{lg: 0, xs: 5}}
       marginBottom={{lg: 0, xs: 5}}
-      marginRight={{lg: 5}}
+      // marginRight={{lg: 5}}
       sx={{ backgroundColor: bg }} 
       borderRadius={ 3 } 
     >

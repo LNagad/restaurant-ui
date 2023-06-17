@@ -1,7 +1,7 @@
 import { ListItemButton } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeView } from '../../../store';
+import { changeView, togleSideBar } from '../../../store';
 
 export const SideBarListItem = ({ item, height = '10%', viewName }) => {
   
@@ -9,6 +9,7 @@ export const SideBarListItem = ({ item, height = '10%', viewName }) => {
   
   const onChangeView = () => {
     dispatch( changeView(viewName) );
+    dispatch( togleSideBar(viewName) );
   };
   
   return (

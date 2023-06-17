@@ -19,7 +19,8 @@ export const Food = () => {
         container 
         display={'flex'}
         alignItems={'center'}
-        justifyContent={'center'}
+        justifyContent={'space-evenly'}
+        flexWrap={'wrap'}
       >
         <FoodGridItem img='/public/assets/ella-olsson.jpg' />
         <FoodGridItem />

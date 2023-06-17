@@ -5,11 +5,6 @@ let drawerWidth = 140;
 
 export const DashboardLayout = ({ children, title }) => {
 
-
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
-  if (isMobile) drawerWidth -= 80;
-  
   return (
     <Box
       sx={{
@@ -27,7 +22,6 @@ export const DashboardLayout = ({ children, title }) => {
 
       <Box
         component={'main'}
-        marginLeft={{ sm: '100px', lg: `${drawerWidth}px`}}
         sx={{ flexGrow: 1, padding: 3 }}
       >
         <Toolbar />

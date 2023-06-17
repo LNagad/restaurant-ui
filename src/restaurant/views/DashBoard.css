@@ -13,3 +13,11 @@ height: 50%;
   /* height: calc(255px - 50%) ; */
   height: 50%;
 } 
+
+.boxShadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fontCharts {
+  font-weight: 'bold' !important;
+}

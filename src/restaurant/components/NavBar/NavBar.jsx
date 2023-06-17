@@ -4,19 +4,26 @@ import { AppBar, Box, Divider, Grid, IconButton, TextField, Toolbar, Typography,
 import './NavBar.css';
 import { NotificationsNoneOutlined } from '@mui/icons-material';
 import { SettingsOutlined } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { togleSideBar } from '../../../store';
 
 export const NavBar = ({ drawerWidth = 140 }) => {
+  const dispatch = useDispatch();
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const { activeView } = useSelector( state => state.restaurant );
   
+  const togleDrawer = () => {
+    dispatch( togleSideBar() );
+  };
+
   return (
     <AppBar
+    
       position='fixed'
       sx={{
-        width: isMobile ? '100%' : `calc(100% - ${drawerWidth}px)`,
-        ml: isMobile ? 0 : `${drawerWidth}px`,
+        width: { md: `calc(100% - ${drawerWidth}px)` }, 
+        ml: { md: `${ drawerWidth }`},
         height: drawerWidth - 40,
         backgroundColor: 'white',
         boxShadow: '0px 0px 15px -1px rgba(0,0,0,0.1)',
@@ -24,8 +31,9 @@ export const NavBar = ({ drawerWidth = 140 }) => {
         justifyContent: 'center'
       }}
     >
-      <Toolbar sx={{ height: 40}}>
+      <Toolbar>
         <IconButton
+          onClick={ togleDrawer }
           color='primary'
           edge='start'
           sx={{ mr: 2, display: { sm: 'none'}}}
@@ -35,13 +43,12 @@ export const NavBar = ({ drawerWidth = 140 }) => {
 
         <Grid
           container
-          display={'flex'}
+          direction={'row'}
           justifyContent={'space-between'}
           alignItems={'center'}
-          alignContent={'center'}
         >
           <Typography
-            width={'25%'} 
+            width={{lg: '25%', xs: '35%'}} 
             color={'primary'}
             fontWeight={'bold'}
             variant='h6' 
@@ -53,7 +60,7 @@ export const NavBar = ({ drawerWidth = 140 }) => {
           </Typography>
 
           <Grid
-            width={'75%'} 
+            width={{lg: '75%', xs: '65%'}} 
             item
             boxSizing={'border-box'}
             display={'flex'}
@@ -81,16 +88,17 @@ export const NavBar = ({ drawerWidth = 140 }) => {
               )
             }
               
-
             <Grid 
               item
               display={'flex'}
-              justifyContent={'space-evenly'}
+              justifyContent={{lg: 'space-evenly', xs: 'center'}}
               alignItems={'center'}
               component={'div'}
-              marginX={2}
+              marginX={{lg: 2, xs: 0}}
             >
-              <NotificationsNoneOutlined color='primary' sx={{opacity: 0.3,  marginRight: 2.5}} />
+              <NotificationsNoneOutlined 
+                color='primary' 
+                sx={{opacity: 0.3,  marginRight: {lg: 2.5, xs: 1}}} />
               <SettingsOutlined color='primary' sx={{opacity: 0.3}} />
             </Grid>
 
@@ -107,12 +115,15 @@ export const NavBar = ({ drawerWidth = 140 }) => {
                   borderRadius: '50%',
                   backgroundColor: '#000',
                   height: '70%',
-                  width: '1.5rem',
+                  width: '1.6rem',
                   marginRight: 1.5
                 }}
               >
               </Box>
-              <Typography noWrap sx={{opacity: 0.5}} fontSize={16} color={'primary'}>Maycol Daniel</Typography>
+              {
+                !isMobile &&
+                <Typography noWrap sx={{opacity: 0.5}} fontSize={16} color={'primary'}>Maycol Daniel</Typography>
+              }
             </Grid>
           </Grid>
         </Grid>

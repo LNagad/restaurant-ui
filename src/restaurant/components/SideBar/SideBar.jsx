@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Button, Drawer, Grid, List, useMediaQuery } from '@mui/material';
+import { Box, Button, Drawer, Grid, List, useMediaQuery, useTheme } from '@mui/material';
 import { LogoutOutlined, HomeOutlined, LocalPizzaOutlined, TableBarOutlined, LunchDiningOutlined, BookOutlined } from '@mui/icons-material';
 
 import { SideBarListItem } from './SideBarListItem';
-import { logout } from '../../../store';
+import { logout, togleSideBar } from '../../../store';
 import './SideBar.css';
 
 export const SideBar = ({ drawerWidth = 140 }) => {
   
   const dispatch = useDispatch();
+  const { activeView, isSideBarOpen } = useSelector( state => state.restaurant );
+  
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  const { activeView } = useSelector( state => state.restaurant );
   
   if (isMobile) drawerWidth -= 80;
 
@@ -25,11 +26,18 @@ export const SideBar = ({ drawerWidth = 140 }) => {
     { item: <BookOutlined color={activeView === 'Orders' ? 'white' : 'listItems'} />, viewName: 'Orders' }
   ];
 
+  const togleDrawer = () => {
+    dispatch( togleSideBar() );
+  };
+
   return (
-    <Box component='nav' className='sidebar-container'>
+    <Box component='nav'
+      sx={{ width: { sm: drawerWidth}, flexShrink: { sm: 0 } }}
+    >
       <Drawer
-        variant='permanent'
-        open={ !isMobile ? true : false}
+        variant={isMobile ? 'temporary' : 'permanent'}
+        open={isSideBarOpen}
+        onClose={ togleDrawer }
         className='hola'
         sx={{ 
           display: { xs: 'block'}, 
