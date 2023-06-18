@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const FatherGrid = ({children}) => {
   return (
     <Grid
-      item
+      item      
       xs={12}
       display={'flex'}
       marginBottom={1}

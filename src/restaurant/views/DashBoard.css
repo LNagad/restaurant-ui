@@ -8,6 +8,8 @@
    width: 100%;
    border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+
 .centerDivCardSecondary {
   display: flex;
   justify-content: start;
@@ -43,6 +45,9 @@
 
 }
 
-.orderFeedTitlesScreen {
-
+.timeLineDivider{
+  border: 1.5px solid #afafaf;
+  transform: rotate(90deg);
+  width: 32px;
+  margin-top: 26px;
 }

@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { green, red, yellow } from '@mui/material/colors';
 
 export const blackTheme = createTheme({
   palette: {
@@ -17,6 +17,15 @@ export const blackTheme = createTheme({
     },
     error: {
       main: red.A400
+    },
+    orderStarted: {
+      main: red.A700
+    },
+    orderInProgress: {
+      main: yellow.A700
+    },
+    orderFinished: {
+      main: green.A700
     }
   }
 });

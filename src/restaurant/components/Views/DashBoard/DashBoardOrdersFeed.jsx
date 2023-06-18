@@ -7,11 +7,13 @@ import { OrderTimelineItem } from './OrderTimelineItem';
 export const DashBoardOrdersFeed = () => {
   const title = 'Order #123: Crispy French Fries and Cheeseburger';
   const subTitle = 'Combo Meal with a refreshing cola included';
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const gridItemProps = {
     item: true ,
     xs:12 ,
     lg:8 ,
+    mb: 2,
     padding:{ xs: 1, lg: 4} ,
     display:'flex',
     flexWrap:'wrap',
@@ -48,8 +50,18 @@ export const DashBoardOrdersFeed = () => {
 
       <Grid {...secondGridProps}>
         <Typography {...TypographyProps}>Orders Timeline</Typography> 
-        <OrderTimelineItem />
+        {
+          Array.from({ length: 2}).map((_, index ) => {
+            let isFinal = false;
+            if (index === 2 - 1) {
+              isFinal = true;
+            }
+            return (<OrderTimelineItem key={index} title={title} isFinal={isFinal} />);
+          } )
+        }
+
       </Grid>
+
     </FatherGrid>
   );
 };
