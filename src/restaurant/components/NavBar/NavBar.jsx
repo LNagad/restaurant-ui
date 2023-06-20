@@ -12,6 +12,7 @@ export const NavBar = ({ drawerWidth = 140 }) => {
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const { activeView } = useSelector( state => state.restaurant );
+  const { displayName } = useSelector( state => state.auth );
   
   const togleDrawer = () => {
     dispatch( togleSideBar() );
@@ -122,7 +123,12 @@ export const NavBar = ({ drawerWidth = 140 }) => {
               </Box>
               {
                 !isMobile &&
-                <Typography noWrap sx={{opacity: 0.5}} fontSize={16} color={'primary'}>Maycol Daniel</Typography>
+                <Typography noWrap 
+                  sx={{opacity: 0.5}} 
+                  fontSize={16} 
+                  color={'primary'}>
+                  {displayName}
+                </Typography>
               }
             </Grid>
           </Grid>

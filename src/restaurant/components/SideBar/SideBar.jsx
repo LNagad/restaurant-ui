@@ -3,7 +3,7 @@ import { Box, Button, Drawer, Grid, List, useMediaQuery, useTheme } from '@mui/m
 import { LogoutOutlined, HomeOutlined, LocalPizzaOutlined, TableBarOutlined, LunchDiningOutlined, BookOutlined } from '@mui/icons-material';
 
 import { SideBarListItem } from './SideBarListItem';
-import { logout, togleSideBar } from '../../../store';
+import { togleSideBar, StartLogout } from '../../../store';
 import './SideBar.css';
 
 export const SideBar = ({ drawerWidth = 140 }) => {
@@ -16,7 +16,7 @@ export const SideBar = ({ drawerWidth = 140 }) => {
   if (isMobile) drawerWidth -= 80;
 
   const onLogout = () => {
-    dispatch( logout() );
+    dispatch( StartLogout() );
   };
 
   const sideBarItems = [

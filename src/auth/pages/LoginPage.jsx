@@ -1,18 +1,24 @@
 
-import { Button, Grid, TextField, useMediaQuery } from '@mui/material';
+import { Alert, Button, Grid, TextField, useMediaQuery } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
 
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/';
+import { useDispatch, useSelector } from 'react-redux';
+import { StartSignInWithEmailAndPassword } from '../../store/';
+import { useForm } from '../../hooks';
 
-
+const initialState = {email: '', password: ''};
 export const LoginPage = () => {
   
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
 
+  const { errorMessage } = useSelector(state => state.auth);
+  
+  const { email, password, onChangeInput } = useForm(initialState);
+
   const onLogin = () => {
-    dispatch( login() );
+    
+    dispatch( StartSignInWithEmailAndPassword({email, password}) );
   };
 
   return (
@@ -28,14 +34,20 @@ export const LoginPage = () => {
         }}>
 
         <Grid item xs={ 12 } >
+          {errorMessage?.map( error => (
+            <Alert sx={{mb: 0.5}} key={error} severity='error'>{error}</Alert>
+          ))}
+        </Grid>
+        <Grid item xs={ 12 } >
           <TextField 
             label='Email'
             type='email'
             placeholder='yourEmail@email.com'
             variant='standard'
             name='email'
+            value={email}
+            onChange={onChangeInput}
             fullWidth
-            
           />
         </Grid>
 
@@ -46,6 +58,8 @@ export const LoginPage = () => {
             placeholder='Your password'
             variant='standard'
             name='password'
+            value={password}
+            onChange={onChangeInput}
             fullWidth
             sx={{ fontWeight: 'bold' }}
           />

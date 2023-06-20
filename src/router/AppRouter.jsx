@@ -2,11 +2,15 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { RestaurantRoutes } from '../restaurant';
 import { AuthRoutes } from '../auth';
 import { useSelector } from 'react-redux';
+import { IsCheckingLoading } from '../ui';
+import { useCheckAuth } from '../hooks';
 export const AppRouter = () => {
 
   
-  const {status} = useSelector( state => state.auth);
-  console.log(status);
+  const {status} = useCheckAuth();
+  
+
+
   return (
     <Routes>
       {
