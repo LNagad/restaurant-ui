@@ -45,7 +45,7 @@ export const StartSignInWithEmailAndPassword = (user) => {
 
     const sesionString = JSON.stringify(sesion);
 
-    localStorage.setItem('session', sesionString);
+    sessionStorage.setItem('session', sesionString);
     dispatch(login ({ uid: userId, email, name, role }));
   };
 };

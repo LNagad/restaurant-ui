@@ -1,5 +1,5 @@
 export const verifySession = async () => {
-  const sessionString = localStorage.getItem('session');
+  const sessionString = sessionStorage.getItem('session');
 
   if (!sessionString) {
     return null;
@@ -10,12 +10,12 @@ export const verifySession = async () => {
     const currentTime = new Date().getTime();
 
     if (currentTime >= session.expiration) {
-      localStorage.removeItem('session');
+      sessionStorage.removeItem('session');
       return null;
     }
 
     if (!session.token) {
-      localStorage.removeItem('session');
+      sessionStorage.removeItem('session');
       return null;
     }
 
@@ -29,12 +29,12 @@ export const verifySession = async () => {
     const result = await response.json();
 
     if (!result.ok) {
-      localStorage.removeItem('session');
+      sessionStorage.removeItem('session');
       return null;
     }
 
     const user = {
-      userId: session.userId,
+      uid: session.uid,
       email: session.email,
       name: session.name,
       role: session.role,
@@ -43,7 +43,7 @@ export const verifySession = async () => {
 
     return user;
   } catch (error) {
-    localStorage.removeItem('session');
+    sessionStorage.removeItem('session');
     return null;
   }
 };
