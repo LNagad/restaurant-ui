@@ -1,87 +1,99 @@
-import React, { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { MaterialReactTable } from 'material-react-table';
+import { Circle } from '@mui/icons-material';
+import moment from 'moment';
 
-
-const data = [
-  {
-    name: {
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-    address: '261 Erdman Ford',
-    city: 'East Daphne',
-    state: 'Kentucky',
-  },
-  {
-    name: {
-      firstName: 'Jane',
-      lastName: 'Doe',
-    },
-    address: '769 Dominic Grove',
-    city: 'Columbus',
-    state: 'Ohio',
-  },
-  {
-    name: {
-      firstName: 'Joe',
-      lastName: 'Doe',
-    },
-    address: '566 Brakus Inlet',
-    city: 'South Linda',
-    state: 'West Virginia',
-  },
-  {
-    name: {
-      firstName: 'Kevin',
-      lastName: 'Vandy',
-    },
-    address: '722 Emie Stream',
-    city: 'Lincoln',
-    state: 'Nebraska',
-  },
-  {
-    name: {
-      firstName: 'Joshua',
-      lastName: 'Rolluffs',
-    },
-    address: '32188 Larkin Turnpike',
-    city: 'Charleston',
-    state: 'South Carolina',
-  },
-];
+import { SaveModal } from './SaveModal';
 
 export const Example = () => {
-  //should be memoized or stable
+  const { restaurantData: { orders } } = useSelector((state) => state.restaurant);
+
+  const data = orders?.result?.map((order) => {
+    const createdFormat = moment(order.createdAt).format('MMMM Do YYYY, h:mm:ss a');
+    return { ...order, createdFormat };
+  });
+
+  const [open, setOpen] = useState(false);
+  const [orderFinded, setOrderFinded] = useState({});
+
+  const handleToggle = () => setOpen(!open);
+
+  const handleRowClick = (id) => {
+    const orderById = data.find((order) => order.id === id);
+    setOrderFinded(orderById);
+    handleToggle();
+  };
+
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'name.firstName', //access nested data with dot notation
-        header: 'First Name',
-        size: 150,
+        accessorKey: 'id',
+        header: 'ID',
+        size: 300,
       },
       {
-        accessorKey: 'name.lastName',
-        header: 'Last Name',
-        size: 150,
+        accessorKey: 'subtotal',
+        header: 'Subtotal',
+        size: 300,
+        Cell: ({ cell }) => {
+          const subtotal = cell.getValue();
+          return `$ ${subtotal}`;
+        },
       },
       {
-        accessorKey: 'address', //normal accessorKey
-        header: 'Address',
-        size: 200,
+        accessorKey: 'status',
+        header: 'Status',
+        size: 300,
+        Cell: ({ cell }) => {
+          const status = cell.getValue();
+          const colorStatus = status === 'En proceso' ? 'orderInProgress' : 'orderFinished';
+
+          return (
+            <>
+              <Circle sx={{ fontSize: 18, marginRight: 1, mb: 0.5 }} color={colorStatus} />
+              {status}
+            </>
+          );
+        },
       },
       {
-        accessorKey: 'city',
-        header: 'City',
-        size: 150,
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-        size: 150,
+        accessorKey: 'createdFormat',
+        header: 'Created At',
+        size: 300,
       },
     ],
-    [],
+    []
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  return (
+    <>
+      <MaterialReactTable
+        columns={columns}
+        data={data}
+        muiTableBodyRowProps={({ row }) => ({
+          onClick: (event) => {
+            handleRowClick(row.original.id);
+          },
+          sx: {
+            cursor: 'pointer',
+          },
+        })}
+        muiTableHeadCellProps={{
+          sx: {
+            fontWeight: 'bold',
+            fontSize: '20px',
+          },
+        }}
+        muiTableBodyCellProps={{
+          sx: {
+            fontWeight: 'normal',
+            fontSize: '18px',
+          },
+        }}
+        enableColumnResizing
+      />
+      <SaveModal open={open} handleToggle={handleToggle} data={orderFinded} />
+    </>
+  );
 };

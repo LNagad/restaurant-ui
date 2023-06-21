@@ -1,8 +1,12 @@
 import { Grid, Typography } from '@mui/material';
 import './Food.css';
 import { FoodGridItem } from '../components';
+import { useSelector } from 'react-redux';
 
 export const Food = () => {
+  const { restaurantData } = useSelector( state => state.restaurant );
+  const { dishes } = restaurantData;
+
   return (
     <Grid container
     >
@@ -22,16 +26,12 @@ export const Food = () => {
         justifyContent={'space-evenly'}
         flexWrap={'wrap'}
       >
-        <FoodGridItem img='/public/assets/ella-olsson.jpg' />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
-        <FoodGridItem />
+        {
+          dishes.result.map( dish => (
+
+            <FoodGridItem key={dish.id} dish={dish} img='/public/assets/ella-olsson.jpg' />
+          ))
+        }
       </Grid>
       
     </Grid>

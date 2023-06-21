@@ -1,48 +1,38 @@
-import { useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { endLoading, startLoading } from '../store';
-
-const options = {
-  method: 'GET',
-  headers: {
-    'x-access-token': 'coinrankinge08201680a48d46138bd9f19825f1c39b37a8407efe02312',
-  },
-};
-      
-const baseURL = 'https://api.coinranking.com/v2/coins/?limit=10';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 export const useCoinsFetch = () => {
-  const [Chart, setChart] = useState([]);
   
-  const dispatch = useDispatch();
+  const { restaurantData } = useSelector(state => state.restaurant);
+  const { orders } = restaurantData;
 
-  const fetchCoins = useCallback(async() => {  
-    try {
-      
-      const resp =  await fetch(baseURL, options);
-      const { data } = await resp.json();
-      setChart(data);
-      dispatch( endLoading() );
-      
-    } catch (error) {
-      console.log(error);
+  const ordersByDay = {};
+
+  // Recorremos las órdenes y contamos las órdenes por día
+  orders.result.forEach((order) => {
+    const createdAt = moment(order.createdAt).format('YYYY-MM-DD'); // Formateamos la fecha a 'YYYY-MM-DD'
+
+    if (ordersByDay[createdAt]) {
+      ordersByDay[createdAt]++;
+    } else {
+      ordersByDay[createdAt] = 1;
     }
-  }, [dispatch]);
-  
-  useEffect(() => {   
-    
-    fetchCoins();
-    console.log('re rendered');
-  }, []);
+  });
 
+  const ordersByDayObj = [];
+  // Ahora puedes obtener el recuento de órdenes por día y realizar las operaciones necesarias
+  Object.entries(ordersByDay).forEach(([day, count]) => {
+    const dayOfWeek = moment(day).format('dddd'); // Traducir la fecha al nombre del día de la semana
+    ordersByDayObj.push({dayOfWeek, date: day, orders: count});
+  });
+
+  
   const data = {
-    labels: Chart?.coins?.map((coin) => coin.name),
+    labels: ordersByDayObj.map( (order) => `${order.dayOfWeek} ${order.date}`),
     datasets: [
       {
-        label: `${Chart?.coins?.length} Coins Available`,
-        data: Chart?.coins?.map((coin) => Math.round(coin.price, 2)),
+        label: `${orders.result.length} Weekly orders`,
+        data: ordersByDayObj.map( order => order.orders),
         backgroundColor: [
           'rgba(255, 99, 132, 1)', // Rojo
           'rgba(54, 162, 235, 1)', // Azul

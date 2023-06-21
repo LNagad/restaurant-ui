@@ -1,11 +1,16 @@
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Circle } from '@mui/icons-material';
 import {Box, Grid, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
 
-export const OrderTimelineItem = ({title, isFinal}) => {
+export const OrderTimelineItem = ({order, isFinal}) => {
   
-  const truncatedTitle = `${title.substring(0, 25)}...`;
-  
+  const { createdAt ,status, dishes} = order;
+
+  const formatedDate = moment(createdAt).format('D MMM YYYY h:mm A');
+  const truncatedTitle = `${dishes[0].name.substring(0, 25)}...`;
+  const colorStatus = status === 'En proceso' ? 'orderInProgress' : 'orderFinished';
+
   const boxProps = {
     display: 'flex',
     component: 'div',
@@ -27,23 +32,23 @@ export const OrderTimelineItem = ({title, isFinal}) => {
           !isFinal ? 
             (
               <>
-                <Circle sx={{fontSize: 18, mt: 0.5}} color='orderFinished' />
+                <Circle sx={{fontSize: 18, mt: 0.5}} color={colorStatus} />
                 <div className='timeLineDivider'></div>
               </>
             ) :
-            <Circle sx={{width: 32, fontSize: 18, mt: 0.5}} color='orderStarted' />
+            <Circle sx={{width: 32, fontSize: 18, mt: 0.5}} color={colorStatus} />
         }
       </Box>
      
       <Box marginLeft={2}>
         <Typography fontSize={19} fontWeight={500}>{truncatedTitle}</Typography>
-        <Typography {...typographyProps}>30 May 2023 12:49 PM</Typography>
+        <Typography {...typographyProps}>{formatedDate}</Typography>
       </Box>
     </Grid>
   );
 };
 
 OrderTimelineItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  isFinal: PropTypes.bool.isRequired
+  isFinal: PropTypes.bool.isRequired,
+  order: PropTypes.object.isRequired
 };

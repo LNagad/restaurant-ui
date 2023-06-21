@@ -51,6 +51,7 @@ export const NavBar = ({ drawerWidth = 140 }) => {
           <Typography
             width={{lg: '25%', xs: '35%'}} 
             color={'primary'}
+            fontSize={26}
             fontWeight={'bold'}
             variant='h6' 
             noWrap 

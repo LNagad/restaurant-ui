@@ -3,12 +3,17 @@ import { FatherGrid } from './FatherGrid';
 
 import { OrderFeedItem } from './OrderFeedItem';
 import { OrderTimelineItem } from './OrderTimelineItem';
+import { useSelector } from 'react-redux';
+
+import { getTimeAgo } from '../../../../helpers';
 
 export const DashBoardOrdersFeed = () => {
-  const title = 'Order #123: Crispy French Fries and Cheeseburger';
-  const subTitle = 'Combo Meal with a refreshing cola included';
+  
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
+  const { restaurantData } = useSelector( state => state.restaurant );
+  const { orders } = restaurantData;
+  
   const gridItemProps = {
     item: true ,
     xs:12 ,
@@ -39,27 +44,26 @@ export const DashBoardOrdersFeed = () => {
         <Box>
           <Typography {...TypographyProps}>Recent orders</Typography>
         </Box>
-
-        <OrderFeedItem title={title} subTitle={subTitle} />
-
-        <div className='lineDivider'></div>
-
-        <OrderFeedItem title={title} subTitle={subTitle} />
+        {
+          orders.result.map( order => (
+            <OrderFeedItem 
+              key={order.id}
+              title={order.dishes[0].name} 
+              subTitle={order.dishes[0].category}
+              date={getTimeAgo(order.createdAt)} />
+          ))
+        }
 
       </Grid>
 
       <Grid {...secondGridProps}>
         <Typography {...TypographyProps}>Orders Timeline</Typography> 
         {
-          Array.from({ length: 2}).map((_, index ) => {
-            let isFinal = false;
-            if (index === 2 - 1) {
-              isFinal = true;
-            }
-            return (<OrderTimelineItem key={index} title={title} isFinal={isFinal} />);
-          } )
+          orders.result.map( (order, index) => {
+            let isFinal = index === (orders.result.length - 1);
+            return (<OrderTimelineItem key={index} order={order} isFinal={isFinal} />);
+          } ) 
         }
-
       </Grid>
 
     </FatherGrid>

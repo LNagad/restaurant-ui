@@ -33,11 +33,12 @@ export const PieChart = React.memo(({ height }) => {
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <IsCheckingLoading />
       ) : (
         <Pie data={data} options={chartOptions} height={500} />
-      )}
+        )} */}
+      <Pie data={data} options={chartOptions} height={500} />
     </>
   );
 });

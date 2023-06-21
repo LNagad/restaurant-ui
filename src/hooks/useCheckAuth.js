@@ -14,7 +14,7 @@ export const useCheckAuth = () => {
       if (!session) {
         dispatch(logout());
       } else {
-        console.log(session);
+        
         const { uid, email, name, role, token, expiration } = session;
         dispatch(login({ uid, email, name, role, token, expiration }));
       }

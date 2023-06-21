@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { Box, Grid, Toolbar, Typography } from '@mui/material';
 import { ReceiptLongOutlined } from '@mui/icons-material';
 import { RestaurantMenuOutlined } from '@mui/icons-material';
@@ -6,10 +7,12 @@ import { FastfoodOutlined } from '@mui/icons-material';
 import { DashBoardBoxItem, DashBoardCharts, DashBoardOrdersFeed } from '../components';
 
 import './DashBoard.css';
-import { LineChart } from '../components/Views/DashBoard/Charts/LineChart';
-import { PieChart } from '../components/Views/DashBoard/Charts/PieChart';
 
 export const DashBoard = () => {
+
+  const { restaurantData } = useSelector(state => state.restaurant);
+  const { orders, dishes, tables, ingredients } = restaurantData;
+  
   const styles = {
     orderIcon: {
       iconStyles: {
@@ -42,11 +45,17 @@ export const DashBoard = () => {
   };
 
   const titlesAndNumbers = [
-    { title: 'Today Orders', number: 25, icon: <ReceiptLongOutlined /> },
-    { title: 'Today Dishes', number: 25, icon: <RestaurantMenuOutlined /> },
-    { title: 'Today Tables', number: 25, icon: <FmdGoodOutlined /> },
-    { title: 'Today Ingredients', number: 25, icon: <FastfoodOutlined /> },
+    { title: 'Today Orders', number: orders.result.length, icon: <ReceiptLongOutlined /> },
+    { title: 'Today Dishes', number: dishes.result.length, icon: <RestaurantMenuOutlined /> },
+    { title: 'Today Tables', number: tables.result.length, icon: <FmdGoodOutlined /> },
+    { title: 'Today Ingredients', number: ingredients.result.length, icon: <FastfoodOutlined /> },
   ];
+  // const titlesAndNumbers = [
+  //   { title: 'Today Orders', number: 25 , icon: <ReceiptLongOutlined /> },
+  //   { title: 'Today Dishes', number: 25, icon: <RestaurantMenuOutlined /> },
+  //   { title: 'Today Tables', number: 25, icon: <FmdGoodOutlined /> },
+  //   { title: 'Today Ingredients', number: 25, icon: <FastfoodOutlined /> },
+  // ];
 
   return (
     <>

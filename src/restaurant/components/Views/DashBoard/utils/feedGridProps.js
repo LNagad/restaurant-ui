@@ -14,12 +14,14 @@ export const gridContainerProps = {
   xs: 10,
   flexWrap: { xs: 'wrap' },
   display: { xs: 'flex' },
+  flexDirection: 'column',
   justifyContent: { xs: 'end', lg: 'start' },
-  marginLeft: { lg: 1 },
+  marginLeft: 2,
 };
 
 export const timeTypographyProps = {
   textAlign: 'end',
-  fontSize: 18,
+  mt: {xs: 2, md: 1, lg: 0},
+  fontSize: { xs: 15, lg: 16},
   sx: { opacity: 0.7 },
 };

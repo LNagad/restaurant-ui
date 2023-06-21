@@ -1,7 +1,13 @@
+import { PeopleOutlined } from '@mui/icons-material';
 import { StarOutlined } from '@mui/icons-material';
 import { Grid, Typography } from '@mui/material';
 
-export const FoodGridItem = ({ img = '/public/assets/ash.jpg' }) => {
+import PropTypes from 'prop-types';
+
+export const FoodGridItem = ({ dish, img = '/public/assets/ash.jpg' }) => {
+  
+  const { name, price, number_of_servings, ingredients  } = dish;
+
   return (
     <Grid item xs={12} md={2.8} boxSizing={'border-box'} marginBottom={3}>
       <div className='card'>
@@ -10,7 +16,7 @@ export const FoodGridItem = ({ img = '/public/assets/ash.jpg' }) => {
         </div>
         <div className='card-body d-flex flex-column align-items-center'>
           <Typography textAlign={'center'} fontWeight={'600'} fontSize="1.2rem">
-            Moti Bowl
+            {name}
           </Typography>
           <div className='d-flex align-items-center'>
             <StarOutlined color='reviewStar' />
@@ -28,27 +34,33 @@ export const FoodGridItem = ({ img = '/public/assets/ash.jpg' }) => {
               Price
             </Typography>
             <Typography fontWeight={'bold'} fontSize="0.9rem">
-              $23.59
+              ${price}
             </Typography>
           </div>
           <div className='foodBorderEnd'>
             <Typography className='opacity-50' fontSize="0.8rem">
-              Item
+              Sevings
             </Typography>
             <Typography fontWeight={'bold'} fontSize="0.9rem">
-              1,500
+              <PeopleOutlined></PeopleOutlined> {number_of_servings}
             </Typography>
           </div>
           <div>
             <Typography className='opacity-50' fontSize="0.8rem">
-              Ordered
+              ingredients
             </Typography>
-            <Typography fontWeight={'bold'} fontSize="0.9rem">
-              200
+            <Typography fontWeight={'bold'} fontSize="0.9rem" textAlign={'end'}>
+              {ingredients.length}
             </Typography>
           </div>
         </div>
       </div>
     </Grid>
   );
+};
+
+
+FoodGridItem.propTypes = {
+  dish: PropTypes.object.isRequired,
+  img: PropTypes.string.isRequired
 };

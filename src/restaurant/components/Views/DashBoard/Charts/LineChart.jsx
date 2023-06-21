@@ -12,8 +12,11 @@ import { IsCheckingLoading } from '../../../../../ui';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale);
     
 export const LineChart = React.memo(() => {
+ 
   const { data } = useCoinsFetch();
-  const { isLoading } = useSelector((state) => state.restaurant);
+  // console.log(orders);
+  
+  // const { isLoading } = useSelector((state) => state.restaurant);
       
   const chartOptions  = {
     maintainAspectRatio: false,
@@ -34,11 +37,12 @@ export const LineChart = React.memo(() => {
     
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <IsCheckingLoading />
       ) : (
         <Line data={data} options={chartOptions} height={500} />
-      )}
+        )} */}
+      <Line data={data} options={chartOptions} height={500} />
     </>
   );
 });
