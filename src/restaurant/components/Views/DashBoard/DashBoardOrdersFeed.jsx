@@ -47,10 +47,10 @@ export const DashBoardOrdersFeed = () => {
         {
           orders.result.map( order => (
             <OrderFeedItem 
-              key={order.id}
-              title={order.dishes[0].name} 
-              subTitle={order.dishes[0].category}
-              date={getTimeAgo(order.createdAt)} />
+              key={order?.id}
+              title={order?.dishes[0]?.name} 
+              subTitle={order?.dishes[0]?.category}
+              date={getTimeAgo(order?.createdAt)} />
           ))
         }
 

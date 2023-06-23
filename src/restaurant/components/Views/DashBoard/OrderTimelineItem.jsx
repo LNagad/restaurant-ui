@@ -8,7 +8,7 @@ export const OrderTimelineItem = ({order, isFinal}) => {
   const { createdAt ,status, dishes} = order;
 
   const formatedDate = moment(createdAt).format('D MMM YYYY h:mm A');
-  const truncatedTitle = `${dishes[0].name.substring(0, 25)}...`;
+  const truncatedTitle = `${dishes[0]?.name.substring(0, 25)}...`;
   const colorStatus = status === 'En proceso' ? 'orderInProgress' : 'orderFinished';
 
   const boxProps = {

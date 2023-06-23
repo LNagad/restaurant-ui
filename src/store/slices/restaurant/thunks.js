@@ -6,12 +6,10 @@ export const startFetchingData = ({token}) => {
     
   return async(dispatch) => {
         
-    
     const AuthHeader = { 
       headers: {'Authorization' : `bearer ${token}`},
       method: 'GET'
     };
-
 
     const dishesFetch = await fetch(http+'/dishes', AuthHeader);
     const ingredientsFetch = await fetch(http+'/ingredients', AuthHeader);
@@ -31,5 +29,35 @@ export const startFetchingData = ({token}) => {
     [ dishes, ingredients, tables, orders ].forEach( e => delete e.ok);
 
     dispatch( loadRestaurantData( { dishes, ingredients, tables, orders}  ));
+  };
+};
+
+export const startSendOrder = (tableId, cartItems, token) => {
+  return async(dispatch) => {
+    console.log('hola');
+    const dishesList = [];
+    
+    cartItems.forEach( dish => {
+      dishesList.push(dish.id);
+    });
+   
+    const options = { 
+      headers: {
+        'Authorization' : `bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({ dishes: dishesList, tableId: tableId}),
+      
+    };
+
+    const dishesFetch = await fetch(http+'/orders', options);
+
+    const dishesResp = await dishesFetch.json();
+
+    if (dishesResp.ok) {
+      dispatch( startFetchingData({token}) );
+      return true;
+    }
   };
 };

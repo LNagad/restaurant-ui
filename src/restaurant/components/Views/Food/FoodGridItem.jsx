@@ -4,19 +4,28 @@ import { Grid, Typography } from '@mui/material';
 
 import PropTypes from 'prop-types';
 
-export const FoodGridItem = ({ dish, img = '/public/assets/ash.jpg' }) => {
+export const FoodGridItem = ({ dish, handleToggle, setModalData, isMobile, img = '/public/assets/ash.jpg' }) => {
   
-  const { name, price, number_of_servings, ingredients  } = dish;
+  const onFoodItemClick = () => {
+    setModalData(dish);
+    handleToggle();
+  };
 
+  const { name = '', price, number_of_servings, ingredients  } = dish;
+  
+  const newName = name.length > 20 ? name.slice(0, 19)+ '...' : name;
+  
   return (
-    <Grid item xs={12} md={2.8} boxSizing={'border-box'} marginBottom={3}>
+    <Grid component={'div'} onClick={onFoodItemClick} 
+      item xs={12} lg={3.2} md={5}  marginLeft={!isMobile && 1 } boxSizing={'border-box'} marginBottom={4}
+      className='gridHover'>
       <div className='card'>
         <div className='p-3'>
           <img className='card-img w-100 foodImgResponsive' src={img} alt='' />
         </div>
         <div className='card-body d-flex flex-column align-items-center'>
-          <Typography textAlign={'center'} fontWeight={'600'} fontSize="1.2rem">
-            {name}
+          <Typography textAlign={'center'} fontWeight={'600'} fontSize="1rem">
+            {newName}
           </Typography>
           <div className='d-flex align-items-center'>
             <StarOutlined color='reviewStar' />
@@ -62,5 +71,8 @@ export const FoodGridItem = ({ dish, img = '/public/assets/ash.jpg' }) => {
 
 FoodGridItem.propTypes = {
   dish: PropTypes.object.isRequired,
-  img: PropTypes.string.isRequired
+  img: PropTypes.string.isRequired,
+  handleToggle: PropTypes.func.isRequired,
+  setModalData: PropTypes.func.isRequired, 
+  isMobile: PropTypes.bool.isRequired
 };

@@ -10,7 +10,9 @@ export const SideBar = ({ drawerWidth = 140 }) => {
   
   const dispatch = useDispatch();
   const { activeView, isSideBarOpen } = useSelector( state => state.restaurant );
-  
+  const { role } = useSelector( state => state.auth );
+  const isAdmin = role === 'ADMIN';
+  const homeView = isAdmin ? 'DashBoard' : 'Food';
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   
   if (isMobile) drawerWidth -= 80;
@@ -20,7 +22,7 @@ export const SideBar = ({ drawerWidth = 140 }) => {
   };
 
   const sideBarItems = [
-    { item: <HomeOutlined color={activeView === 'DashBoard' ? 'white' : 'listItems'} />, viewName: 'DashBoard' },
+    { item: <HomeOutlined color={activeView === 'DashBoard' ? 'white' : 'listItems'} />, viewName: homeView },
     { item: <LocalPizzaOutlined color={activeView === 'Food' ? 'white' : 'listItems'} />, viewName: 'Food' },
     { item: <TableBarOutlined color={activeView === 'Tables' ? 'white' : 'listItems'} />, viewName: 'Tables' },
     { item: <BookOutlined color={activeView === 'Orders' ? 'white' : 'listItems'} />, viewName: 'Orders' }
@@ -56,15 +58,21 @@ export const SideBar = ({ drawerWidth = 140 }) => {
             display={'flex'}
             sx={{ width: drawerWidth, }}
           >
-            <SideBarListItem height='15%' item={<LunchDiningOutlined/>} viewName='DashBoard'/>
+            <SideBarListItem height='15%' item={<LunchDiningOutlined/>} viewName={homeView}/>
 
-            {sideBarItems.map((sidebarItem, index) => (
-              <SideBarListItem
-                key={index}
-                item={sidebarItem.item}
-                viewName={sidebarItem.viewName}
-              />
-            ))}
+            {sideBarItems.map((sidebarItem, index) => {
+           
+              //?to not show the food and home sidebar items
+              if (!isAdmin && index < 2 ) return;
+           
+              return (
+                <SideBarListItem
+                  key={index}
+                  item={sidebarItem?.item}
+                  viewName={sidebarItem?.viewName}
+                />
+              );
+            })}
 
             <Grid item alignItems={'end'}
               sx={{ height: '40%', display: 'flex', justifyContent: 'center'}}

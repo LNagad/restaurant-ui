@@ -8,3 +8,37 @@
   max-height: 156px;
   object-fit: cover;
 }
+.gridHover {
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.gridHover:hover{
+  transform: scale(1.1);
+}
+.noBorder:focus {
+  border: none;
+  outline: none;
+}
+
+.floatingCart {
+  position: fixed;
+  top: 50vh;
+  right: 10px;
+  outline: 2px solid #000;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+.floatingCart span {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  color: aliceblue;
+  background-color: #000;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  
+}
+

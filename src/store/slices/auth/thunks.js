@@ -1,3 +1,4 @@
+import { logoutRestaurant } from '../restaurant/restaurantSlice';
 import { checkingCredentials, login, logout } from './authSlice';
 
 export const checkingAuthentication = () => {
@@ -9,7 +10,7 @@ export const checkingAuthentication = () => {
 export const StartSignInWithEmailAndPassword = (user) => {
   return async(dispatch) => {
     dispatch( checkingCredentials() );
-    console.log(user);
+    
     const resp = await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: {
@@ -46,7 +47,7 @@ export const StartSignInWithEmailAndPassword = (user) => {
     const sesionString = JSON.stringify(sesion);
 
     sessionStorage.setItem('session', sesionString);
-    dispatch(login ({ uid: userId, email, name, role }));
+    dispatch(login ({ uid: userId, email, name, role, token }));
   };
 };
 
@@ -85,7 +86,8 @@ export const StartSignupWithEmailAndPassword = (userRequest) => {
 
 export const StartLogout = () => {
   return async(dispatch) => {
-    localStorage.removeItem('session');
+    sessionStorage.removeItem('session');
     dispatch(logout());
+    dispatch(logoutRestaurant());
   };
 };
