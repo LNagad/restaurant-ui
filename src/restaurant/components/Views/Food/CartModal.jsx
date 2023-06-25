@@ -18,6 +18,7 @@ import {
 
 import { CartItem } from './CartItem';
 import { clearCart, endLoading, startLoading, startSendOrder } from '../../../../store';
+import { showAlert } from '../../../../helpers';
 
 export const CartModal = ({ open, handleToggle, isMobile }) => {
   const style = {
@@ -62,6 +63,7 @@ export const CartModal = ({ open, handleToggle, isMobile }) => {
       setIsLoading(false); 
       dispatch( clearCart() );
       handleToggle();
+      showAlert({title: 'Created!',text: 'Order has been placed.'});
     }
     
   };
@@ -105,6 +107,7 @@ export const CartModal = ({ open, handleToggle, isMobile }) => {
                     title={item.name}
                     isMobile={isMobile}
                     handleToggle={handleToggle}
+                    img={item?.img}
                   />
                 ))}
               </Grid>

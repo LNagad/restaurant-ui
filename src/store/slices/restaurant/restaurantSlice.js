@@ -4,7 +4,7 @@ const initialState = {
   activeView: 'DashBoard',
   isLoading: true,
   isSideBarOpen: false,
-  restaurantData: null,
+  restaurantData: [],
   cartItemsCounter: 0,
   cartItems: [],
 };
@@ -12,7 +12,12 @@ const initialState = {
 export const restaurantSlice = createSlice({
   name: 'restaurant',
   initialState: {
-    ...initialState
+    activeView: 'DashBoard',
+    isLoading: true,
+    isSideBarOpen: false,
+    restaurantData: [],
+    cartItemsCounter: 0,
+    cartItems: [],
   },
   reducers: {
     loadRestaurantData: (state, { payload }) => {
@@ -54,17 +59,18 @@ export const restaurantSlice = createSlice({
 });
 
 export const {
-  changeView,
-  startLoading,
-  endLoading,
-  togleSideBar,
-  loadRestaurantData,
-  incrementCartItemsCounter,
-  decrementCartItemsCounter,
   addCartItem,
-  removeCartItems,
+  changeView,
   clearCart,
-  logoutRestaurant
+  decrementCartItemsCounter,
+  endLoading,
+  incrementCartItemsCounter,
+  loadRestaurantData,
+  logoutRestaurant,
+  removeCartItems,
+  removeOrder,
+  startLoading,
+  togleSideBar,
 } = restaurantSlice.actions;
 
-export default restaurantSlice.reducer;
+export const { actions, reducer } = restaurantSlice;

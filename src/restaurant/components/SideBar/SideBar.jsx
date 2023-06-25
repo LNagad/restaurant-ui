@@ -24,7 +24,7 @@ export const SideBar = ({ drawerWidth = 140 }) => {
   const sideBarItems = [
     { item: <HomeOutlined color={activeView === 'DashBoard' ? 'white' : 'listItems'} />, viewName: homeView },
     { item: <LocalPizzaOutlined color={activeView === 'Food' ? 'white' : 'listItems'} />, viewName: 'Food' },
-    { item: <TableBarOutlined color={activeView === 'Tables' ? 'white' : 'listItems'} />, viewName: 'Tables' },
+    // { item: <TableBarOutlined color={activeView === 'Tables' ? 'white' : 'listItems'} />, viewName: 'Tables' },
     { item: <BookOutlined color={activeView === 'Orders' ? 'white' : 'listItems'} />, viewName: 'Orders' }
   ];
 
@@ -64,6 +64,7 @@ export const SideBar = ({ drawerWidth = 140 }) => {
            
               //?to not show the food and home sidebar items
               if (!isAdmin && index < 2 ) return;
+              if (isAdmin && index === 2 ) return;
            
               return (
                 <SideBarListItem

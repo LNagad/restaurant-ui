@@ -1,11 +1,8 @@
-import { SearchOutlined } from '@mui/icons-material';
-import { MenuOutlined } from '@mui/icons-material';
-import { AppBar, Box, Divider, Grid, IconButton, TextField, Toolbar, Typography, useMediaQuery } from '@mui/material';
-import './NavBar.css';
-import { NotificationsNoneOutlined } from '@mui/icons-material';
-import { SettingsOutlined } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppBar, Box, Grid, IconButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
+import { SearchOutlined, NotificationsNoneOutlined, MenuOutlined, SettingsOutlined } from '@mui/icons-material';
 import { togleSideBar } from '../../../store';
+import './NavBar.css';
 
 export const NavBar = ({ drawerWidth = 140 }) => {
   const dispatch = useDispatch();
@@ -112,7 +109,7 @@ export const NavBar = ({ drawerWidth = 140 }) => {
               component={'div'}
               marginX={2}
             >
-              <Box 
+              {/* <Box 
                 sx={{
                   borderRadius: '50%',
                   backgroundColor: '#000',
@@ -121,7 +118,7 @@ export const NavBar = ({ drawerWidth = 140 }) => {
                   marginRight: 1.5
                 }}
               >
-              </Box>
+              </Box> */}
               {
                 !isMobile &&
                 <Typography noWrap 

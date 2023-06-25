@@ -50,6 +50,7 @@ export const DashBoard = () => {
     { title: 'Today Tables', number: tables.result.length, icon: <FmdGoodOutlined /> },
     { title: 'Today Ingredients', number: ingredients.result.length, icon: <FastfoodOutlined /> },
   ];
+  
   // const titlesAndNumbers = [
   //   { title: 'Today Orders', number: 25 , icon: <ReceiptLongOutlined /> },
   //   { title: 'Today Dishes', number: 25, icon: <RestaurantMenuOutlined /> },

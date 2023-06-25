@@ -34,10 +34,12 @@ export const Food = () => {
         <Typography fontSize={25} fontWeight={500}>
           Find the best foods 😋
         </Typography>
+        {(!isWaiter) && 
         <Button 
           onClick={() => setOpen2(!open2)}
           variant='outlined' 
           color='warning'>Add new Dish</Button>
+        }
       </Grid>
 
       {/* //TODO: CATEGORY CARROUSEL */}

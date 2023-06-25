@@ -15,11 +15,11 @@ import { addCartItem, incrementCartItemsCounter } from '../../../../store';
 
 export const DishDetailsModal = ({ open, handleToggle, data, isMobile, isWaiter }) => {
   const { id, name, ingredients, price, category, number_of_servings, img } = data;
-
+  
   const dispatch = useDispatch();
   
   const onAddToCart = () => {
-    dispatch( addCartItem({ id, name, ingredients, price, category, number_of_servings }));
+    dispatch( addCartItem({ id, name, ingredients, price, category, number_of_servings, img }));
     dispatch(incrementCartItemsCounter());
     handleToggle();
   };
@@ -60,7 +60,7 @@ export const DishDetailsModal = ({ open, handleToggle, data, isMobile, isWaiter 
         <Fade in={open}>
           <Box sx={style}>
             <Grid item xs={12} display={'flex'} justifyContent={'center'}>
-              <img width={'80%'} src={!img ? '/public/assets/ella-olsson.jpg' : img} />
+              <img width={'100%'} src={!img ? '/public/assets/ella-olsson.jpg' : img} />
             </Grid>
 
             <Box p={3}>

@@ -35,7 +35,7 @@ export const RestaurantDashboard = () => {
         dataLoaded ? (
           (activeView === 'DashBoard' && isAdmin && <DashBoard />) ||
           (activeView === 'Food' && <Food />) ||
-          (activeView === 'Tables' && <Tables />) ||
+          // (activeView === 'Tables' && <Tables />) ||
           (activeView === 'Orders' && <Orders />)
         ) : (
           <IsCheckingLoading /> // Renderizar un mensaje de carga mientras los datos se están obteniendo

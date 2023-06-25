@@ -1,3 +1,4 @@
+import { setInitialState } from './restaurantModalSlice';
 import { loadRestaurantData } from './restaurantSlice';
 
 const  http = 'http://localhost:3000';
@@ -95,6 +96,59 @@ export const startSavingDish = (dish, token) => {
       dispatch( startFetchingData({token}) );
       return true;
     }
-  
+  };
+};
+
+
+export const startDeletingOrder = (id, token) => {
+  return async(dispatch) => {
+   
+    const options = { 
+      headers: {
+        'Authorization' : `bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE',     
+    };
+    
+    const orderDelete = await fetch(`${http}/orders/${id}`, options);
+    
+    if (orderDelete.ok) {
+      dispatch( startFetchingData({token}) );
+      return true;
+    } else {
+      return false;
+    }
+  };   
+};
+
+export const startUpdatingOrder = (order, token) => {
+  return async(dispatch) => {
+    const { id, dishes } = order;
+    const newDishes = dishes.map( dish => dish.id);
+    
+
+    const options = { 
+      headers: {
+        'Authorization' : `bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT', 
+      body: JSON.stringify({id, dishes: newDishes})    
+    };
+
+    const orderUpdate = await fetch(`${http}/orders/${id}`, options);
+    
+    if (!orderUpdate.ok) {
+      throw new Error('Could not update order');
+    }
+
+    const resp = await orderUpdate.json();
+    
+    if (resp.ok) {
+      dispatch( startFetchingData({token}) );
+      return resp.ok;
+    }
+
   };
 };

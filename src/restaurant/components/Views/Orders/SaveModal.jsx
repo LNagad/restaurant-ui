@@ -67,7 +67,7 @@ export const SaveModal = ({open, handleToggle, data}) => {
                     dishes?.map( dish => (
                       <ListItem key={dish.id} sx={{padding: 0, mt: 1, mb: 1}}>
                         <ListItemAvatar>
-                          <Avatar><img className='feedImg' src='/assets/ash.jpg'/></Avatar>
+                          <Avatar><img className='feedImg' src={dish.img || '/assets/ash.jpg'}/></Avatar>
                         </ListItemAvatar>
                         <Box sx={{
                           width: '100%',display: 'flex', alignItems: 'center', justifyContent: 'space-between',
