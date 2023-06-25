@@ -34,7 +34,7 @@ export const startFetchingData = ({token}) => {
 
 export const startSendOrder = (tableId, cartItems, token) => {
   return async(dispatch) => {
-    console.log('hola');
+    
     const dishesList = [];
     
     cartItems.forEach( dish => {
@@ -59,5 +59,42 @@ export const startSendOrder = (tableId, cartItems, token) => {
       dispatch( startFetchingData({token}) );
       return true;
     }
+  };
+};
+
+export const startSavingDish = (dish, token) => {
+  return async(dispatch) => {
+   
+    console.log(dish);
+    console.log(token);
+
+    const formData = new FormData();
+    // console.log(dish);
+    formData.append('name', dish.name);
+    formData.append('img', dish.dishImg);
+    formData.append('category', dish.category);
+    formData.append('servings', dish.servings);
+    formData.append('ingredients', JSON.stringify(dish.ingredients));
+    formData.append('price', dish.price);
+    
+
+    const options = { 
+      headers: {
+        'Authorization' : `bearer ${token}`,
+      },
+      method: 'POST',
+      body: formData,
+      
+    };
+    
+    const dishesFetch = await fetch(http+'/dishes', options);
+    
+    const dishesResp = await dishesFetch.json();
+    
+    if (dishesResp.ok) {
+      dispatch( startFetchingData({token}) );
+      return true;
+    }
+  
   };
 };

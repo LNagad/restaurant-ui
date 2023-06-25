@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { addCartItem, incrementCartItemsCounter } from '../../../../store';
 
 export const DishDetailsModal = ({ open, handleToggle, data, isMobile, isWaiter }) => {
-  const { id, name, ingredients, price, category, number_of_servings } = data;
+  const { id, name, ingredients, price, category, number_of_servings, img } = data;
 
   const dispatch = useDispatch();
   
@@ -59,8 +59,8 @@ export const DishDetailsModal = ({ open, handleToggle, data, isMobile, isWaiter 
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Grid item xs={12}>
-              <img width={'100%'} src="/assets/ash.jpg" />
+            <Grid item xs={12} display={'flex'} justifyContent={'center'}>
+              <img width={'80%'} src={!img ? '/public/assets/ella-olsson.jpg' : img} />
             </Grid>
 
             <Box p={3}>

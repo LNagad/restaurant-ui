@@ -4,14 +4,14 @@ import { Grid, Typography } from '@mui/material';
 
 import PropTypes from 'prop-types';
 
-export const FoodGridItem = ({ dish, handleToggle, setModalData, isMobile, img = '/public/assets/ash.jpg' }) => {
+export const FoodGridItem = ({ dish, handleToggle, setModalData, isMobile }) => {
   
   const onFoodItemClick = () => {
     setModalData(dish);
     handleToggle();
   };
 
-  const { name = '', price, number_of_servings, ingredients  } = dish;
+  const { name = '', price, number_of_servings, ingredients, img  } = dish;
   
   const newName = name.length > 20 ? name.slice(0, 19)+ '...' : name;
   
@@ -21,7 +21,7 @@ export const FoodGridItem = ({ dish, handleToggle, setModalData, isMobile, img =
       className='gridHover'>
       <div className='card'>
         <div className='p-3'>
-          <img className='card-img w-100 foodImgResponsive' src={img} alt='' />
+          <img className='card-img w-100 foodImgResponsive' src={!img ? '/public/assets/ella-olsson.jpg' : img } alt='' />
         </div>
         <div className='card-body d-flex flex-column align-items-center'>
           <Typography textAlign={'center'} fontWeight={'600'} fontSize="1rem">

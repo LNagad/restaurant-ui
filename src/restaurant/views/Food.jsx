@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Button, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import {
   FoodFloatingCart,
   FoodGridItem,
   DishDetailsModal,
+  SaveDishModal,
 } from '../components';
 import './Food.css';
 
@@ -18,6 +19,8 @@ export const Food = () => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
+  const [open2, setOpen2] = useState(false);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -27,10 +30,14 @@ export const Food = () => {
 
   return (
     <Grid container>
-      <Grid item xs={12} padding={4}>
+      <Grid item xs={12} padding={4} display={'flex'} justifyContent={'space-between'}>
         <Typography fontSize={25} fontWeight={500}>
           Find the best foods 😋
         </Typography>
+        <Button 
+          onClick={() => setOpen2(!open2)}
+          variant='outlined' 
+          color='warning'>Add new Dish</Button>
       </Grid>
 
       {/* //TODO: CATEGORY CARROUSEL */}
@@ -49,10 +56,14 @@ export const Food = () => {
             isMobile={isMobile}
             handleToggle={handleToggle}
             setModalData={setModalData}
-            img="/public/assets/ella-olsson.jpg"
           />
         ))}
       </Grid>
+
+      <SaveDishModal 
+        open={open2}
+        handleToggle={() => setOpen2(!open2)}
+        isMobile={isMobile} />
 
       <DishDetailsModal
         open={open}
@@ -61,8 +72,13 @@ export const Food = () => {
         isMobile={isMobile}
         isWaiter={isWaiter}
       />
-
-      <FoodFloatingCart isMobile={isMobile} />
+     
+      {
+        isWaiter &&
+        <>
+          <FoodFloatingCart isMobile={isMobile} />
+        </>
+      }
     </Grid>
   );
 };

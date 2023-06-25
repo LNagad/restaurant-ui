@@ -50,7 +50,8 @@ export const DashBoardOrdersFeed = () => {
               key={order?.id}
               title={order?.dishes[0]?.name} 
               subTitle={order?.dishes[0]?.category}
-              date={getTimeAgo(order?.createdAt)} />
+              date={getTimeAgo(order?.createdAt)}
+              img={order?.dishes[0]?.img} />
           ))
         }
 

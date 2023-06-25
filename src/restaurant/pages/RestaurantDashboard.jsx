@@ -6,6 +6,7 @@ import { DashboardLayout } from '../layout/DashboardLayout';
 
 import { IsCheckingLoading } from '../../ui';
 import { DashBoard, Food, Orders, Tables } from '../views';
+import { Toaster} from 'react-hot-toast';
 
 export const RestaurantDashboard = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const RestaurantDashboard = () => {
 
   return (
     <DashboardLayout>
+      <Toaster position="bottom-right" reverseOrder={false}/>
       {
         dataLoaded ? (
           (activeView === 'DashBoard' && isAdmin && <DashBoard />) ||

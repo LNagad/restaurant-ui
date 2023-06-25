@@ -71,6 +71,7 @@ export const useForm = (initialState = {}, validationsForm = {}) => {
     onResetBtn, 
 
     isFormValid,
+    formValidation,
     ...formValidation
   };
 };

@@ -23,7 +23,6 @@ const TypographyProps = {
 
 export const SaveModal = ({open, handleToggle, data}) => {
   const { id, createdFormat, dishes, status, subtotal } = data;
-  console.log(data);
 
   const colorStatus = status === 'En proceso' ? 'orderInProgress' : 'orderFinished';
 
