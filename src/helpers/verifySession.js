@@ -19,7 +19,7 @@ export const verifySession = async () => {
       return null;
     }
 
-    const response = await fetch('import.meta.env.VITE_BACKEND_API/auth/verify-token', {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/verify-token`, {
       headers: {
         Authorization: `Bearer ${session.token}`,
       },
