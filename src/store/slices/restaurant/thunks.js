@@ -1,7 +1,7 @@
-import { setInitialState } from './restaurantModalSlice';
+// import { setInitialState } from './restaurantModalSlice';
 import { loadRestaurantData } from './restaurantSlice';
 
-const  http = 'http://localhost:3000';
+const  http = import.meta.env.VITE_BACKEND_API;
 
 export const startFetchingData = ({token}) => {
     

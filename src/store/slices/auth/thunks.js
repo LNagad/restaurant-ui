@@ -1,6 +1,8 @@
 import { logoutRestaurant } from '../restaurant/restaurantSlice';
 import { checkingCredentials, login, logout } from './authSlice';
 
+const backendAPI = import.meta.env.VITE_BACKEND_API;
+
 export const checkingAuthentication = () => {
   return (dispatch) => {
     dispatch( checkingCredentials() );
@@ -11,7 +13,7 @@ export const StartSignInWithEmailAndPassword = (user) => {
   return async(dispatch) => {
     dispatch( checkingCredentials() );
     
-    const resp = await fetch('http://localhost:3000/auth/login', {
+    const resp = await fetch(`${backendAPI}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +59,7 @@ export const StartSignupWithEmailAndPassword = (userRequest) => {
 
     const { email, password, name, phone } = userRequest;
     
-    const resp = await fetch('http://localhost:3000/auth/signup?isAdmin=true', {
+    const resp = await fetch(`${backendAPI}/auth/signup?isAdmin=true`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
